@@ -1,0 +1,33 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Homepage</th>
+            <th>MoreInfo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="repo in repos">
+            <td>{{repo.name}}</td>
+            <td>{{repo.description}}</td>
+            <td><a href="{{repo.html_url}}">{{repo.html_url}}</a></td>
+            <td>
+                <button ng-if="!repo.parentRepository && !repo.notAFork" class="btn btn-default" ng-click="getMoreInfoAboutRepo(repo)">MOREINFO</button>
+                {{repo.parentRepository.name}}
+                <a href="{{repo.parentRepository.html_url}}">{{repo.parentRepository.html_url}}</a>
+                <span ng-if="repo.notAFork">
+                  NOT A FORK
+                </SPAN>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-xs-6 col-md-4">
+        <button ng-disabled="routeParams.firstResult == 0" ng-click="lastPage()" class="btn btn-default" type="submit">Back</button>
+    </div>
+    <div class="col-xs-6 col-md-4">
+        <button class="btn btn-default" ng-click="nextPage()" type="submit">Next Page</button>
+    </div>
+</div>
